@@ -1,21 +1,45 @@
 {
-	"name": "mule",
-	"version": "0.1.0",
-	"author": "Hubify <support@hubify.com>",
-	"description": "A simple process pool for unburdening the main event loop for CPU intensive tasks.",
-	"contributors": [
-		{
-			"name": "Dave Kuhn",
-			"email": "david.s.kuhn@gmail.com"
-		}
-	],
-	"main": "./lib/index.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/Hubify/node-mule.git"
-	},
-	"license": "MIT",
-	"engine": {
-		"node": ">=0.8"
-	}
+  "name": "coffee-mule",
+  "version": "1.0.0",
+  "author": "Ethan Mick <ethan@ethanmick.com>",
+  "description": "A simple process pool for unburdening the main event loop for CPU intensive tasks.",
+  "main": "./lib/index.coffee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ethanmick/coffee-mule.git"
+  },
+  "license": "MIT",
+  "engine": {
+    "node": ">=0.12"
+  },
+  "config": {
+    "blanket": {
+      "debug": true,
+      "pattern": "lib",
+      "shortnames": true,
+      "data-cover-flags": "debug",
+      "data-cover-reporter-options": {
+        "shortnames": true
+      },
+      "data-cover-never": "node_modules",
+      "loader": "./node-loaders/coffee-script"
+    },
+    "travis-cov": {
+      "threshold": 90
+    }
+  },
+  "dependencies": {
+    "winston": "0.9.0"
+  },
+  "devDependencies": {
+    "blanket-node": "2.0.0",
+    "chai": "2.1.0",
+    "coffee-script": "1.9.1",
+    "coffeelint": "1.9.2",
+    "coffeelint-use-strict": "0.0.1",
+    "david": "6.1.4",
+    "sinon": "1.12.2",
+    "mocha": "2.1.0",
+    "travis-cov": "0.2.5"
+  }
 }
