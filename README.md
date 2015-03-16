@@ -1,5 +1,12 @@
-Mule.js
-=======
+# Coffee Mule
+
+A dash of Coffee with your work queue.
+
+## Why this Fork?
+
+Mule includes files to do it's work, and because these files are written in javascript, they only require `.js` files. I need the them require `.coffee` files.
+
+## About
 
 Mule is a work queue for CPU intensive tasks. You can use it to offload tasks
 that would otherwise kill your fast, responsive event loop. It's a bit like
@@ -21,18 +28,17 @@ Installation
 ------------
 
 ```
-npm install mule
+npm install coffee-mule
 ```
 
 Then to get up and running:
 
-```javascript
-var WorkQueue = require('mule').WorkQueue;
+```coffee
+WorkQueue = require('mule').WorkQueue
 
-var workQueue = new WorkQueue(__dirname + '/worker.js');
-workQueue.enqueue('some data for worker to process', function (result) {
-    // do something with result
-});
+workQueue = new WorkQueue(__dirname + '/worker.coffee');
+workQueue.enqueue 'some data for worker to process', (result)->
+  // do something with result
 ```
 
 Contrived Example
