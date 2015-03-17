@@ -9,14 +9,18 @@ log = require './log'
 
 class WorkQueue
 
-  constructor: (script, numWorkers = os.cpus().length)->
+  constructor: (script, @options = {})->
     @workers = []
     @queue = []
+    cpus = os.cpus().length
+    @options.numWorkers ?= cpus
+    @options.maxWorkers ?= cpus * 2
+
     i = 0
 
     log.debug "Starting #{numWorkers} workers.."
 
-    @fork(script) while i++ < numWorkers
+    @fork(script) while i++ < @options.numWorkers
 
   fork: (script)->
     worker = new Worker(script)
@@ -31,8 +35,12 @@ class WorkQueue
 
     @workers.push(worker)
 
-  enqueue: (task, callback)->
-    @queue.push task: task, callback: callback
+  enqueue: (task, timeout, callback)->
+    if not callback
+      callback = timeout
+      timeout = null
+
+    @queue.push task: task, callback: callback, timeout: timeout
     process.nextTick(@_run.bind(this))
 
   _run: (worker)->
@@ -44,9 +52,27 @@ class WorkQueue
         if w.status is Worker.READY
           worker = w
           break
+
+    @fork() if not worker and @options.autoexpand and @workers.length < @options.maxWorkers
     return unless worker
 
     queued = @queue.shift()
-    worker.send(queued.task, queued.callback)
+    callback = null
+
+    if queued.timeout
+      timeoutId = null
+
+      callback = ->
+        clearTimeout(timeoutId)
+        queued.callback.apply(this, arguments)
+
+      timeoutId = setTimeout =>
+        worker.process.kill('SIGINT')
+        callback.call(this, @options.timeoutResult or {})
+      , queued.timeout
+    else
+      callback = queued.callback
+
+    worker.send(queued.task, callback)
 
 module.exports = WorkQueue
