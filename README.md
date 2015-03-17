@@ -4,7 +4,7 @@ A dash of Coffee with your work queue.
 
 ## Why this Fork?
 
-Mule includes files to do it's work, and because these files are written in javascript, they only require `.js` files. I need the them require `.coffee` files.
+Updated Mule to the modern era, and also added a few options that I needed.
 
 ## About
 
