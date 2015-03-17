@@ -2,6 +2,8 @@
 
 A dash of Coffee with your work queue.
 
+[![Build Status](https://travis-ci.org/ethanmick/coffee-mule.svg?branch=master)](https://travis-ci.org/ethanmick/coffee-mule) [![Coverage Status](https://coveralls.io/repos/ethanmick/coffee-mule/badge.svg)](https://coveralls.io/r/ethanmick/coffee-mule)
+
 ## Why this Fork?
 
 Updated Mule to the modern era, and also added a few options that I needed.
