@@ -120,20 +120,8 @@ The worker script is nothing special and can really be anything imaginable. Best
 There are some important things to note however:
 
 1. Always include final line in the example worker above. Without it the parent process won't know that the worker has started successfully. Also ensure that it's the very last thing to execute upon initialization so that you can confidently send tasks to it knowing that everything is ready and in place. If you have async initialization code you should ensure that 'READY' is called after all async init code has completed.
-2. process.on('message'... must be present in order to receive jobs from the parent.
-3. process.send(result) must also be present as the final step of your processing to send back the result and notify the parent process that the worker is ready for more work. If this isn't present or never gets called due to an exception etc., your worker won't be available to receive any more work and will effectively hang.
+2. `process.on('message'...)` must be present in order to receive jobs from the parent.
+3. `process.send(result)` must also be present as the final step of your processing to send back the result and notify the parent process that the worker is ready for more work. If this isn't present or never gets called due to an exception etc., your worker won't be available to receive any more work and will effectively hang.
 
-
-Controlling the Number of Workers
----------------------------------
-
-Defining the number of worker processes you desire is easy. Simply pass a positive integer as the second argument to WorkQueue like so:
-
-```javascript
-var nWorkers = 4,
-    workQueue = new WorkQueue('/path/to/worker.js', nWorkers);
-```
-
-By default mule chooses the number of worker processes based on the number of CPU cores available (via os.cpus().length). This is generally the most performant option, though depending on the task your mileage may vary.
 
 
