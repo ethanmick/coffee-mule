@@ -124,8 +124,7 @@ There are some important things to note however:
 3. process.send(result) must also be present as the final step of your processing to send back the result and notify the parent process that the worker is ready for more work. If this isn't present or never gets called due to an exception etc., your worker won't be available to receive any more work and will effectively hang.
 
 
-Controlling the Number of Workers
----------------------------------
+## Controlling the Number of Workers
 
 Defining the number of worker processes you desire is easy. Simply pass a positive integer as the second argument to WorkQueue like so:
 
@@ -136,4 +135,12 @@ var nWorkers = 4,
 
 By default mule chooses the number of worker processes based on the number of CPU cores available (via os.cpus().length). This is generally the most performant option, though depending on the task your mileage may vary.
 
+## CHANGELOG
 
+### v1.0.0 (March 17th, 2015)
+* Initial Version
+* Rewrote in CoffeeScript
+* Added Travis-CI
+* Added Winston Loggin
+* Tests on modern node versions
+* Added new options
