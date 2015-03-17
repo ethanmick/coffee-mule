@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Ethan Mick <ethan@ethanmick.com>",
   "description": "A simple process pool for unburdening the main event loop for CPU intensive tasks.",
-  "main": "./lib/index.coffee",
+  "main": "./bin/work_queue.js",
   "scripts": {
     "prepublish": "coffee -o bin -c lib/",
     "test": "npm run _test; npm run cov; npm run lint;",
