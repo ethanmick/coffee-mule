@@ -33,12 +33,12 @@
   },
   "devDependencies": {
     "blanket-node": "2.0.0",
-    "chai": "2.1.0",
+    "chai": "2.1.2",
     "coffee-script": "1.9.1",
     "coffeelint": "1.9.2",
     "coffeelint-use-strict": "0.0.1",
-    "david": "6.1.4",
-    "sinon": "1.12.2",
+    "david": "6.1.5",
+    "sinon": "1.14.1",
     "mocha": "2.1.0",
     "travis-cov": "0.2.5"
   }
