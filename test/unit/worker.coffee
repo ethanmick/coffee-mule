@@ -13,6 +13,7 @@ describe 'Worker', ->
 
   it 'should have defaults', ->
     stub = sinon.stub(childProcess, 'fork').returns pid: 10, once: ->
+      this
     w = new Worker('./test/fixtures/worker1.coffee')
     should.exist w.process
     w.pid.should.equal 10
@@ -20,12 +21,13 @@ describe 'Worker', ->
     stub.restore()
 
   it 'should throw without a script', ->
-    ( -> new Worker() ).should.throw
+    ( -> new Worker() ).should.throw /MUST/
 
   describe 'A worker instance', ->
     w = null
     beforeEach ->
       stub = sinon.stub(childProcess, 'fork').returns pid: 10, once: ->
+        this
       w = new Worker('./test/fixtures/worker1.coffee')
       should.exist w.process
       w.pid.should.equal 10

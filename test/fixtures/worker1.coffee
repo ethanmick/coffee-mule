@@ -1,3 +1,4 @@
+'use strict'
 ###
 * Calculate a Fibonacci number. Note that if you ran this in the main event
 * loop it would block.
