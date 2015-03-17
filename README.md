@@ -7,7 +7,8 @@ A dash of Coffee with your work queue.
 ## Why this Fork?
 
 Updated Mule to the modern era, and also added a few options that I needed.
-
+* Timeout for tasks
+* Automatic pool size increase
 
 ## About
 
@@ -25,7 +26,7 @@ node's inbuilt IPC for forked node processes.
 
 We currently use this in production at [Hubify](http://hubify.com) at reasonable 
 scale so it should be fairly bulletproof. That being said, if you notice anything 
-unusual (or how we can make it better) please raise a new issue. 
+unusual (or how we can make it better) please raise a new issue.
 
 Installation
 ------------
