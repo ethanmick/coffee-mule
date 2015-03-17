@@ -17,9 +17,7 @@ class WorkQueue
     @options.maxWorkers ?= cpus * 2
 
     i = 0
-
-    log.debug "Starting #{numWorkers} workers.."
-
+    log.debug "Starting #{@options.numWorkers} workers.."
     @fork(script) while i++ < @options.numWorkers
 
   fork: (script)->
@@ -40,10 +38,11 @@ class WorkQueue
       callback = timeout
       timeout = null
 
-    @queue.push task: task, callback: callback, timeout: timeout
+    @queue.push(task: task, callback: callback, timeout: timeout)
     process.nextTick(@_run.bind(this))
 
   _run: (worker)->
+    log.debug 'RUNNING', @queue
     return if @queue.length is 0
 
     unless worker
@@ -53,13 +52,14 @@ class WorkQueue
           worker = w
           break
 
-    @fork() if not worker and @options.autoexpand and @workers.length < @options.maxWorkers
+    return @fork() if not worker and @options.autoexpand and @workers.length < @options.maxWorkers
     return unless worker
 
     queued = @queue.shift()
     callback = null
 
     if queued.timeout
+      log.debug 'timeout', queued.timeout
       timeoutId = null
 
       callback = ->
