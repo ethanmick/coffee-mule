@@ -5,6 +5,7 @@
   "description": "A simple process pool for unburdening the main event loop for CPU intensive tasks.",
   "main": "./lib/index.coffee",
   "scripts": {
+    "prepublish": "coffee -o bin -c lib/",
     "test": "npm run _test; npm run cov; npm run lint;",
     "_test": "WINSTON=error mocha --compilers coffee:coffee-script/register ./test/unit ./test/integration",
     "coveralls": "WINSTON=error mocha --compilers coffee:coffee-script/register --require ./node_modules/blanket-node/bin/index.js --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js ./test/unit ./test/integration",
