@@ -4,6 +4,14 @@
   "author": "Ethan Mick <ethan@ethanmick.com>",
   "description": "A simple process pool for unburdening the main event loop for CPU intensive tasks.",
   "main": "./lib/index.coffee",
+  "scripts": {
+    "test": "npm run _test; npm run cov; npm run lint; npm run coveralls;",
+    "_test": "mocha --compilers coffee:coffee-script/register ./test/unit ./test/integration",
+    "coveralls": "mocha --compilers coffee:coffee-script/register --require ./node_modules/blanket-node/bin/index.js --reporter mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js ./test/unit ./test/integration",
+    "cov": "mocha --compilers coffee:coffee-script/register --require ./node_modules/blanket-node/bin/index.js -R travis-cov ./test/unit ./test/integration",
+    "lint": "coffeelint ./lib ./test",
+    "check-dependencies": "david"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ethanmick/coffee-mule.git"
@@ -37,9 +45,11 @@
     "coffee-script": "1.9.1",
     "coffeelint": "1.9.2",
     "coffeelint-use-strict": "0.0.1",
+    "coveralls": "2.11.2",
     "david": "6.1.5",
     "sinon": "1.14.1",
     "mocha": "2.1.0",
+    "mocha-lcov-reporter": "0.0.2",
     "travis-cov": "0.2.5"
   }
 }
