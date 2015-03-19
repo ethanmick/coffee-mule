@@ -12,6 +12,7 @@
   WorkQueue = (function() {
     function WorkQueue(script, options) {
       var base, base1, cpus, i;
+      this.script = script;
       this.options = options != null ? options : {};
       this.workers = [];
       this.queue = [];
@@ -25,13 +26,13 @@
       i = 0;
       log.debug("Starting " + this.options.numWorkers + " workers..");
       while (i++ < this.options.numWorkers) {
-        this.fork(script);
+        this.fork();
       }
     }
 
-    WorkQueue.prototype.fork = function(script) {
+    WorkQueue.prototype.fork = function() {
       var worker;
-      worker = new Worker(script);
+      worker = new Worker(this.script);
       worker.on('ready', this._run.bind(this));
       worker.process.on('exit', (function(_this) {
         return function(code, signal) {
@@ -45,7 +46,7 @@
                 _this.workers.splice(i, 1);
               }
             }
-            return _this.fork(script);
+            return _this.fork();
           }
         };
       })(this));

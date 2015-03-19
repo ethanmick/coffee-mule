@@ -9,7 +9,7 @@ log = require './log'
 
 class WorkQueue
 
-  constructor: (script, @options = {})->
+  constructor: (@script, @options = {})->
     @workers = []
     @queue = []
     cpus = os.cpus().length
@@ -18,10 +18,10 @@ class WorkQueue
 
     i = 0
     log.debug "Starting #{@options.numWorkers} workers.."
-    @fork(script) while i++ < @options.numWorkers
+    @fork() while i++ < @options.numWorkers
 
-  fork: (script)->
-    worker = new Worker(script)
+  fork: ->
+    worker = new Worker(@script)
     worker.on 'ready', @_run.bind(this)
     worker.process.on 'exit', (code, signal)=>
       if code isnt 0 # Code will be non-zero if process dies suddenly
@@ -29,7 +29,7 @@ class WorkQueue
         for w, i in @workers
           if w.pid is worker.pid
             @workers.splice(i, 1) # Remove dead worker from pool.
-        @fork(script) # FTW!
+        @fork() # FTW!
 
     @workers.push(worker)
 
