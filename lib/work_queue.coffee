@@ -27,9 +27,9 @@ class WorkQueue
       if code isnt 0 # Code will be non-zero if process dies suddenly
         log.warn "Worker process #{worker.pid} died. Respawning..."
         for w, i in @workers
-          if w.pid is worker.pid
+          if w is undefined or w.pid is worker.pid
             @workers.splice(i, 1) # Remove dead worker from pool.
-        @fork() # FTW!
+        @fork()
 
     @workers.push(worker)
 
