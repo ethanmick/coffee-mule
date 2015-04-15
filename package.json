@@ -1,6 +1,6 @@
 {
   "name": "coffee-mule",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Ethan Mick <ethan@ethanmick.com>",
   "description": "A simple process pool for unburdening the main event loop for CPU intensive tasks.",
   "main": "./bin/work_queue.js",

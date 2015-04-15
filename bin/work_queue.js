@@ -42,7 +42,7 @@
             ref = _this.workers;
             for (i = j = 0, len = ref.length; j < len; i = ++j) {
               w = ref[i];
-              if (w.pid === worker.pid) {
+              if (w === void 0 || w.pid === worker.pid) {
                 _this.workers.splice(i, 1);
               }
             }
